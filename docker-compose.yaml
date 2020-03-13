@@ -1,0 +1,13 @@
+version: '3'
+services:
+  ipxe-web-server:
+    image: xtrasolver/ipxe-web-server:latest
+    ports:
+    - "8080:80"
+    volumes:
+    - ./volume-data:/usr/share/nginx/html
+  tftp-server:
+    image: xtrasolver/ipxe-tftp-server:latest
+    ports:
+    - "69:10069/udp"
+    network_mode: host

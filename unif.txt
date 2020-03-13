@@ -1,0 +1,11 @@
+configure
+
+delete service dhcp-server shared-network-name net_014_rancher_eth1_192.168.14.0-24  subnet 192.168.14.0/24 bootfile-name
+edit service dhcp-server shared-network-name net_014_rancher_eth1_192.168.14.0-24  subnet 192.168.14.0/24
+
+delete subnet-parameters
+set subnet-parameters "filename &quot;undionly.kpxe&quot;;"
+
+commit
+exit
+exit

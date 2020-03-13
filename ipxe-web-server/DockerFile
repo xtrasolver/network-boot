@@ -1,0 +1,3 @@
+FROM nginx:alpine
+
+# Mount static content in /usr/share/nginx/html

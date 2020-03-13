@@ -1,0 +1,5 @@
+#!ipxe
+
+dhcp
+
+chain http://192.168.14.100:8080/bootstrap.ipxe
