@@ -1,5 +1,7 @@
 bootstrap.ipxe	22.03.2020	717
 dir.txt	22.03.2020	0
+flux-helm-operator.yaml	22.03.2020	15730
+flux.yaml	22.03.2020	20014
 k3os-amd64.iso	22.03.2020	472481792
 k3os-cloud-config	22.03.2020	463
 k3os-initrd-amd64	12.03.2020	93406730

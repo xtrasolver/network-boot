@@ -32,6 +32,9 @@ write_files:
 
       sudo curl --insecure -sfL $manifestUrl -o /var/lib/rancher/k3s/server/manifests/rancher-join.yaml
 
+      # Flux & Helm Operator
+      sudo curl http://192.168.14.100:8080/flux.yaml -o /var/lib/rancher/k3s/server/manifests/flux.yaml
+
     owner: root
     path: /etc/rc.local
     permissions: '0755'  
