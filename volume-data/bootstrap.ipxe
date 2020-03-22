@@ -4,6 +4,12 @@
 # Location of Kernel/Initrd images
 set base-url http://192.168.14.100:8080
 
-kernel ${base-url}/k3os-vmlinuz-amd64 k3os.mode=install k3os.install.iso_url=${base-url}/k3os-amd64.iso k3os.install.config_url=${base-url}/k3os-cloud-config k3os.install.silent=true k3os.install.device=/dev/sda
+iseq ${net0/mac} 00:15:5d:04:6f:d3 && set node rancher        ||
+iseq ${net0/mac} 00:15:5d:04:6f:d5 && set node k3os-master-01 ||
+iseq ${net0/mac} 00:15:5d:04:6f:d6 && set node k3os-worker-01 ||
+iseq ${net0/mac} 00:15:5d:04:6f:d7 && set node k3os-worker-02 ||
+iseq ${net0/mac} 00:15:5d:04:6f:d8 && set node k3os-edge      ||
+
+kernel ${base-url}/k3os-vmlinuz-amd64 k3os.mode=install k3os.install.iso_url=${base-url}/k3os-amd64.iso k3os.install.config_url=${base-url}/cluster/${node}.yaml k3os.install.silent=true k3os.install.device=/dev/sda
 initrd ${base-url}/k3os-initrd-amd64
 boot

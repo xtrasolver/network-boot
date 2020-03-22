@@ -1,0 +1,7 @@
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH1axpc6xBD57Pm2ECBOw5rGw+ji+cKIdLspoxiCxvhANYSfCA9n6R4DAp7ILranQEBN9J7TDw+Q7LutXv1jDbNkm/UsLGzc0dbHnbk0TpbnF37Yx2j5EDiIUOPH/qQPQrTzqDUCjM+ZH1Fl0eoPO0HIl2nTQCTVyPS1o0RVd6ls68Os2fNsSReWwhhw/iID7yQ+F0zV5Az1wVUTpEUK1Ji+yalEQGiC0gOYD0qDQ+5h85F8co9jk/4CbZpvZSuCl57qoOynNNv/txT4Jx33Yzavx57wQeU5KQD/7nqdt+30avJ7QrBAqfc0XAk5Pidsa63wMuSyQLq/R5cm1r4EGZ
+hostname: k3os-worker-02
+k3os:
+  k3s_args:
+  token: myclustersecret
+  server_url: https://k3os-master-01:6443

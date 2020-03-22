@@ -1,0 +1,52 @@
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH1axpc6xBD57Pm2ECBOw5rGw+ji+cKIdLspoxiCxvhANYSfCA9n6R4DAp7ILranQEBN9J7TDw+Q7LutXv1jDbNkm/UsLGzc0dbHnbk0TpbnF37Yx2j5EDiIUOPH/qQPQrTzqDUCjM+ZH1Fl0eoPO0HIl2nTQCTVyPS1o0RVd6ls68Os2fNsSReWwhhw/iID7yQ+F0zV5Az1wVUTpEUK1Ji+yalEQGiC0gOYD0qDQ+5h85F8co9jk/4CbZpvZSuCl57qoOynNNv/txT4Jx33Yzavx57wQeU5KQD/7nqdt+30avJ7QrBAqfc0XAk5Pidsa63wMuSyQLq/R5cm1r4EGZ
+hostname: k3os-master-01
+write_files:
+  - encoding: ""
+    content: |-
+      #!/bin/bash -x
+      export curl
+      export RANCHER_URL=https://rancher.192.168.14.118.xip.io
+      export RANCHER_TOKEN=token-rh9ss:79jf72qgncs59tcjsd4m8pxdhftcgkb2zgvzf42vsttj242bc2pbq4
+      export RANCHER_DEFAULT_CONTEXT=local:p-5fzdw
+      export RANCHER_CLUSTER_NAME=krtek
+      export DOWNLOAD_BASE=http://192.168.14.100:8080
+
+      # Wait for rancher server
+      while true; do
+        curl -sLk ${RANCHER_URL}/ping && break
+        sleep 5
+      done
+
+      # Download rancher cli
+      sudo curl -L ${DOWNLOAD_BASE}/rancher-cli/rancher -o /usr/local/bin/rancher
+      sudo chmod +x /usr/local/bin/rancher
+
+      # Login into rancher
+      rancher login $RANCHER_URL --token $RANCHER_TOKEN --skip-verify --context $RANCHER_DEFAULT_CONTEXT
+
+      # Import this cluster
+      rancher clusters create $RANCHER_CLUSTER_NAME --import
+
+      manifestUrl=$(rancher cluster import $RANCHER_CLUSTER_NAME -q 2>/dev/null | grep -Eo '(http|https)://.*$' -m 1)
+
+      sudo curl --insecure -sfL $manifestUrl -o /var/lib/rancher/k3s/server/manifests/rancher-join.yaml
+
+    owner: root
+    path: /etc/rc.local
+    permissions: '0755'  
+run_cmd:
+  - "/etc/rc.local"
+k3os:
+  k3s_args:
+    - "server"
+    # - "--disable-agent"
+    # - "--cluster-init"
+    - "--no-deploy=servicelb"
+    - "--kube-controller-arg=flex-volume-plugin-dir=/var/lib/kubernetes/kubelet-plugins/volume/exec"
+  token: myclustersecret
+  ntp_servers:
+    - 0.cz.pool.ntp.org
+    - 1.cz.pool.ntp.org
+    - 2.cz.pool.ntp.org
+    - 3.cz.pool.ntp.org

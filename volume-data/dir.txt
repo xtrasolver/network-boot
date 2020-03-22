@@ -1,10 +1,8 @@
-bootstrap.ipxe	11.03.2020	375
+bootstrap.ipxe	11.03.2020	703
 dir.txt	12.03.2020	0
-ipxe.efi	12.03.2020	945440
-ipxe.efi.md5	12.03.2020	32
-k3os-amd64.iso	12.03.2020	472481792
-k3os-cloud-config	12.03.2020	487
+k3os-amd64.iso	16.03.2020	472481792
 k3os-initrd-amd64	12.03.2020	93406730
 k3os-vmlinuz-amd64	12.03.2020	9172864
+rancher-cli.tar.gz	22.03.2020	4094169
 undionly.kpxe	12.03.2020	67139
 undionly.kpxe.md5	12.03.2020	32
